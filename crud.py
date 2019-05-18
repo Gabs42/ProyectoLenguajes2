@@ -1,7 +1,10 @@
 from flask import Flask, request, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from flask_marshmallow import Marshmallow
+<<<<<<< HEAD
 from pyswip import Prolog
+=======
+>>>>>>> b1aa2db0a01382d15242edcfb3bbb9cf4198fa3b
 import os
 
 app = Flask(__name__)
@@ -14,39 +17,61 @@ ma = Marshmallow(app)
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(80), unique=True)
+<<<<<<< HEAD
     password = db.Column(db.String(120), unique=True)
 
     def __init__(self, username, password):
         self.username = username
         self.password = password
+=======
+    email = db.Column(db.String(120), unique=True)
+
+    def __init__(self, username, email):
+        self.username = username
+        self.email = email
+>>>>>>> b1aa2db0a01382d15242edcfb3bbb9cf4198fa3b
 
 
 class UserSchema(ma.Schema):
     class Meta:
         # Fields to expose
+<<<<<<< HEAD
         fields = ('username', 'password')
+=======
+        fields = ('username', 'email')
+>>>>>>> b1aa2db0a01382d15242edcfb3bbb9cf4198fa3b
 
 
 user_schema = UserSchema()
 users_schema = UserSchema(many=True)
 
+<<<<<<< HEAD
 @app.route('/')
 def index():
     return '<h1>Welcome</h1>'
+=======
+>>>>>>> b1aa2db0a01382d15242edcfb3bbb9cf4198fa3b
 
 # endpoint to create new user
 @app.route("/user", methods=["POST"])
 def add_user():
     username = request.json['username']
+<<<<<<< HEAD
     password = request.json['password']
 
     new_user = User(username, password)
+=======
+    email = request.json['email']
+
+    new_user = User(username, email)
+>>>>>>> b1aa2db0a01382d15242edcfb3bbb9cf4198fa3b
 
     db.session.add(new_user)
     db.session.commit()
 
     return user_schema.jsonify(new_user)
 
+<<<<<<< HEAD
 @app.route("/receta", methods=["POST"])
 def add_receta():
     request_data = request.get_json()
@@ -81,6 +106,8 @@ def login():
 
     return user_schema.jsonify(validacion)
 
+=======
+>>>>>>> b1aa2db0a01382d15242edcfb3bbb9cf4198fa3b
 
 # endpoint to show all users
 @app.route("/user", methods=["GET"])
@@ -103,9 +130,15 @@ def user_detail(username):
 def user_update(id):
     user = User.query.get(id)
     username = request.json['username']
+<<<<<<< HEAD
     password = request.json['password']
 
     user.password = password
+=======
+    email = request.json['email']
+
+    user.email = email
+>>>>>>> b1aa2db0a01382d15242edcfb3bbb9cf4198fa3b
     user.username = username
 
     db.session.commit()
@@ -120,3 +153,10 @@ def user_delete(id):
     db.session.commit()
 
     return user_schema.jsonify(user)
+<<<<<<< HEAD
+=======
+
+
+if __name__ == '__main__':
+    app.run(debug=True)
+>>>>>>> b1aa2db0a01382d15242edcfb3bbb9cf4198fa3b
