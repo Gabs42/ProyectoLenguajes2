@@ -3,6 +3,7 @@ package com.example.appproyectolenguajes;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -22,6 +23,9 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+import com.amazonaws.mobile.client.AWSMobileClient;
+import com.amazonaws.mobile.client.AWSStartupHandler;
+import com.amazonaws.mobile.client.AWSStartupResult;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -38,6 +42,12 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        AWSMobileClient.getInstance().initialize(this, new AWSStartupHandler() {
+            @Override
+            public void onComplete(AWSStartupResult awsStartupResult) {
+                Log.d("YourMainActivity", "AWSMobileClient is instantiated and you are connected to AWS!");
+            }
+        }).execute();
         usuario = (EditText) findViewById(R.id.usuarioTxt);
         password = (EditText) findViewById(R.id.passText);
         login = (Button) findViewById(R.id.loginButton);
@@ -87,7 +97,7 @@ public class MainActivity extends AppCompatActivity {
                     startActivity(intent);
                 }
                 if(login.getUsername().equals("Rejected")){
-                    txt.setText("Yikes");
+                    //txt.setText("Yikes");
                 }
                 else{
                     txt.setText("Login boys");
@@ -100,7 +110,7 @@ public class MainActivity extends AppCompatActivity {
                 txt.setText(t.getMessage());
             }
         });
-        txt.setText("No existe usuario");
+        txt.setText("No existe usuario o contraseña incorrecta");
     }
 
     private void registrarUsuario(String username,String password){

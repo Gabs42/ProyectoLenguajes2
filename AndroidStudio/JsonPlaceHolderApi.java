@@ -20,4 +20,16 @@ public interface JsonPlaceHolderApi {
 
     @POST("receta")
     Call<PostReceta> createReceta(@Body PostReceta receta);
+
+    @POST("receta/nombre")
+    Call<List<PostReceta>> buscarRecetaNombre(@Body PostReceta receta);
+
+    @POST("receta/tipo")
+    Call<List<PostReceta>> buscarRecetaTipo(@Body PostReceta receta);
+
+    @POST("receta/ingrediente")
+    Call<List<PostReceta>> buscarRecetaIngrediente(@Body PostReceta receta);
+
+    @GET("receta")
+    Call<List<PostReceta>> getRecetas();
 }
