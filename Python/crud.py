@@ -12,12 +12,14 @@ db = SQLAlchemy(app)
 ma = Marshmallow(app)
 test = 11
 
+#se establece statements necesarios para el funcionamiento de busquedas
 f = open("conocimientos.pl","a")
 f.write("member2(X,[X|_]).\n")
 f.write("member2(X,[Y|T]):-member2(X,T).\n")
 f.close()
 c=4
 
+#la clase ususario que sera almacenada dentro de la base de datos
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(80), unique=True)
@@ -37,11 +39,12 @@ class UserSchema(ma.Schema):
 user_schema = UserSchema()
 users_schema = UserSchema(many=True)
 
+#endpoint de prueba
 @app.route('/')
 def index():
     return '<h1>Welcome</h1>'
 
-# endpoint to create new user
+# endpoint para crear un nuevo usuario
 @app.route("/user", methods=["POST"])
 def add_user():
     username = request.json['username']
@@ -57,6 +60,7 @@ def add_user():
 #endpoint para agregar una nueva receta
 @app.route("/receta", methods=["POST"])
 def add_receta():
+    #se consuige la informacin del JSON de entraaa
     request_data = request.get_json()
     nombreIn = request_data['nombre']
     tipoIn = request_data['tipo']
@@ -64,6 +68,7 @@ def add_receta():
     ingredienteIn = request_data['ingredientes']
     fotoIn = request_data['foto']
 
+    #el statement de prolog que se escribira en el archivo
     prologStatement = "receta(" + nombreIn + "," + tipoIn + "," + pasosIn + "," + ingredienteIn + "," + fotoIn + ").\n"
 
     f = open("conocimientos.pl","a")
@@ -77,6 +82,7 @@ def add_receta():
 def getreceta():
     listaJson = []
     prolog = Prolog()
+    #se consulta la base de conocimientos de prologStatement
     prolog.consult("conocimientos.pl")
     for soln in prolog.query("receta(A,B,C,D,E)"):
         listaPasos = ""
@@ -94,8 +100,10 @@ def getreceta():
 
     return Response(json.dumps(listaJson),  mimetype='application/json')
 
+#endpoint para buscar una receta por nombre
 @app.route("/receta/nombre", methods=["POST"])
 def getrecetaNombre():
+    #se consuige la informacin del JSON de entrada
     request_data = request.get_json()
     nombreIn = request_data['nombre']
     tipoIn = request_data['tipo']
@@ -119,8 +127,10 @@ def getrecetaNombre():
 
     return Response(json.dumps(listaJson),  mimetype='application/json')
 
+#endpoint para buscar una receta por tipo
 @app.route("/receta/tipo", methods=["POST"])
 def getrecetaTipo():
+    #se consuige la informacin del JSON de entrada
     request_data = request.get_json()
     nombreIn = request_data['nombre']
     tipoIn = request_data['tipo']
@@ -144,8 +154,10 @@ def getrecetaTipo():
 
     return Response(json.dumps(listaJson),  mimetype='application/json')
 
+#endpoint para buscar por ingrediente
 @app.route("/receta/ingrediente", methods=["POST"])
 def getrecetaIngrediente():
+    #se consuige la informacin del JSON de entrada
     request_data = request.get_json()
     nombreIn = request_data['nombre']
     tipoIn = request_data['tipo']
@@ -155,6 +167,7 @@ def getrecetaIngrediente():
     insertar = 0;
     listaJson = []
     prolog = Prolog()
+    #se consulta la base de conocimientos
     prolog.consult("conocimientos.pl")
     prolog.assertz("buscarIng(Z,A,B,C,D,E):-receta(A,B,C,D,E),member2(Z,D)")
     for soln in prolog.query("buscarIng("+ingredienteIn+",A,B,C,D,E)"):
@@ -195,14 +208,14 @@ def login():
     return user_schema.jsonify(validacion)
 
 
-# endpoint to show all users
+#endpoint de prueba para ver ususario actuales
 @app.route("/user", methods=["GET"])
 def get_user():
     all_users = User.query.all()
     result = users_schema.dump(all_users)
     return jsonify(result.data)
 
-
+"""
 # endpoint to get user detail by id
 @app.route("/user/<username>", methods=["GET"])
 def user_detail(username):
@@ -233,3 +246,4 @@ def user_delete(id):
     db.session.commit()
 
     return user_schema.jsonify(user)
+"""
