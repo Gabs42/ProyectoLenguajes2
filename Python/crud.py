@@ -10,7 +10,7 @@ basedir = os.path.abspath(os.path.dirname(__file__))
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir, 'crud.sqlite')
 db = SQLAlchemy(app)
 ma = Marshmallow(app)
-test = 11
+test = 12
 
 #se establece statements necesarios para el funcionamiento de busquedas
 f = open("conocimientos.pl","a")
