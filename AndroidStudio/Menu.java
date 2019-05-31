@@ -10,6 +10,7 @@ public class Menu extends AppCompatActivity {
     private Button nuevo;
     private Button listar;
     private Button buscar;
+    private Button logout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -17,6 +18,7 @@ public class Menu extends AppCompatActivity {
         nuevo = (Button) findViewById(R.id.butonNueva);
         listar = (Button) findViewById(R.id.butonList);
         buscar = (Button) findViewById(R.id.butonSearch);
+        logout = (Button) findViewById(R.id.butonLogout);
 
         nuevo.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -42,5 +44,17 @@ public class Menu extends AppCompatActivity {
                 startActivity(change);
             }
         });
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent change  = new Intent(Menu.this,MainActivity.class);
+                startActivity(change);
+            }
+        });
+
+    }
+    @Override
+    public void onBackPressed(){
+        return;
     }
 }

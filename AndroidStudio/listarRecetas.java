@@ -36,12 +36,20 @@ public class listarRecetas extends AppCompatActivity {
     private ImageView imagen3;
     private ImageView imagen4;
     private ImageView imagen5;
+    private TextView showTxt2;
+    private TextView showTxt3;
+    private TextView showTxt4;
+    private TextView showTxt5;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_listar_recetas);
         showTxt = (TextView) findViewById(R.id.listarTxt);
+        showTxt2 = (TextView) findViewById(R.id.listarTxt2);
+        showTxt3 = (TextView) findViewById(R.id.listarTxt3);
+        showTxt4 = (TextView) findViewById(R.id.listarTxt4);
+        showTxt5 = (TextView) findViewById(R.id.listarTxt5);
         receta1 = (Button) findViewById(R.id.buttonReceta1);
         receta2 = (Button) findViewById(R.id.buttonReceta2);
         receta3 = (Button) findViewById(R.id.buttonReceta3);
@@ -85,27 +93,42 @@ public class listarRecetas extends AppCompatActivity {
                     if(contador==1){
                         Glide.with(listarRecetas.this).asBitmap().load("https://s3.amazonaws.com/proyectolenguajes-userfiles-mobilehub-1737542905/public/"+fotos[0]).into(imagen1);
                         receta1.setVisibility(View.VISIBLE);
+                        String content = "";
+                        content += "Nombre: "+receta.getNombre();
+                        showTxt.setText(content);
                     }
                     if(contador==2){
                         Glide.with(listarRecetas.this).asBitmap().load("https://s3.amazonaws.com/proyectolenguajes-userfiles-mobilehub-1737542905/public/"+fotos[0]).into(imagen2);
                         receta2.setVisibility(View.VISIBLE);
+                        String content = "";
+                        content += "Nombre: "+receta.getNombre();
+                        showTxt2.setText(content);
                     }
                     if(contador==3){
                         Glide.with(listarRecetas.this).asBitmap().load("https://s3.amazonaws.com/proyectolenguajes-userfiles-mobilehub-1737542905/public/"+fotos[0]).into(imagen3);
                         receta3.setVisibility(View.VISIBLE);
+                        String content = "";
+                        content += "Nombre: "+receta.getNombre();
+                        showTxt3.setText(content);
                     }
                     if(contador==4){
                         Glide.with(listarRecetas.this).asBitmap().load("https://s3.amazonaws.com/proyectolenguajes-userfiles-mobilehub-1737542905/public/"+fotos[0]).into(imagen4);
                         receta4.setVisibility(View.VISIBLE);
+                        String content = "";
+                        content += "Nombre: "+receta.getNombre();
+                        showTxt4.setText(content);
                     }
                     if(contador==5){
                         Glide.with(listarRecetas.this).asBitmap().load("https://s3.amazonaws.com/proyectolenguajes-userfiles-mobilehub-1737542905/public/"+fotos[0]).into(imagen5);
                         receta5.setVisibility(View.VISIBLE);
+                        String content = "";
+                        content += "Nombre: "+receta.getNombre();
+                        showTxt5.setText(content);
                     }
                     contador+=1;
-                    String content = "";
-                    content += "Nombre: "+receta.getNombre() + "\n \n \n";
-                    showTxt.append(content);
+                    //String content = "";
+                    //content += "Nombre: "+receta.getNombre() + "\n \n \n";
+                    //showTxt.append(content);
                 }
             }
 
@@ -160,6 +183,10 @@ public class listarRecetas extends AppCompatActivity {
 
     private void mostrarSiguientes() {
         showTxt.setText("");
+        showTxt2.setText("");
+        showTxt3.setText("");
+        showTxt4.setText("");
+        showTxt5.setText("");
         multiplicador +=1;
         contador = 1;
         receta1.setVisibility(View.INVISIBLE);
@@ -175,27 +202,42 @@ public class listarRecetas extends AppCompatActivity {
             if(contador==1){
                 Glide.with(listarRecetas.this).asBitmap().load("https://s3.amazonaws.com/proyectolenguajes-userfiles-mobilehub-1737542905/public/"+fotos[0]).into(imagen1);
                 receta1.setVisibility(View.VISIBLE);
+                String content = "";
+                content += "Nombre: "+recetas.get(index).getNombre();
+                showTxt.setText(content);
             }
             if(contador==2){
-                Glide.with(listarRecetas.this).asBitmap().load("https://s3.amazonaws.com/proyectolenguajes-userfiles-mobilehub-1737542905/public/"+fotos[0]).into(imagen1);
+                Glide.with(listarRecetas.this).asBitmap().load("https://s3.amazonaws.com/proyectolenguajes-userfiles-mobilehub-1737542905/public/"+fotos[0]).into(imagen2);
                 receta2.setVisibility(View.VISIBLE);
+                String content = "";
+                content += "Nombre: "+recetas.get(index).getNombre();
+                showTxt2.setText(content);
             }
             if(contador==3){
-                Glide.with(listarRecetas.this).asBitmap().load("https://s3.amazonaws.com/proyectolenguajes-userfiles-mobilehub-1737542905/public/"+fotos[0]).into(imagen1);
+                Glide.with(listarRecetas.this).asBitmap().load("https://s3.amazonaws.com/proyectolenguajes-userfiles-mobilehub-1737542905/public/"+fotos[0]).into(imagen3);
                 receta3.setVisibility(View.VISIBLE);
+                String content = "";
+                content += "Nombre: "+recetas.get(index).getNombre();
+                showTxt3.setText(content);
             }
             if(contador==4){
-                Glide.with(listarRecetas.this).asBitmap().load("https://s3.amazonaws.com/proyectolenguajes-userfiles-mobilehub-1737542905/public/"+fotos[0]).into(imagen1);
+                Glide.with(listarRecetas.this).asBitmap().load("https://s3.amazonaws.com/proyectolenguajes-userfiles-mobilehub-1737542905/public/"+fotos[0]).into(imagen4);
                 receta4.setVisibility(View.VISIBLE);
+                String content = "";
+                content += "Nombre: "+recetas.get(index).getNombre();
+                showTxt4.setText(content);
             }
             if(contador==5){
-                Glide.with(listarRecetas.this).asBitmap().load("https://s3.amazonaws.com/proyectolenguajes-userfiles-mobilehub-1737542905/public/"+fotos[0]).into(imagen1);
+                Glide.with(listarRecetas.this).asBitmap().load("https://s3.amazonaws.com/proyectolenguajes-userfiles-mobilehub-1737542905/public/"+fotos[0]).into(imagen5);
                 receta5.setVisibility(View.VISIBLE);
+                String content = "";
+                content += "Nombre: "+recetas.get(index).getNombre();
+                showTxt5.setText(content);
             }
             contador+=1;
-            String content = "";
-            content += "Nombre: "+recetas.get(index).getNombre() + "\n \n \n";
-            showTxt.append(content);
+            //String content = "";
+            //content += "Nombre: "+recetas.get(index).getNombre() + "\n \n \n";
+            //showTxt.append(content);
         }
     }
 

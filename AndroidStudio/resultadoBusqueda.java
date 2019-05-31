@@ -31,11 +31,19 @@ public class resultadoBusqueda extends AppCompatActivity {
     private ImageView imagen3;
     private ImageView imagen4;
     private ImageView imagen5;
+    private TextView showTxt2;
+    private TextView showTxt3;
+    private TextView showTxt4;
+    private TextView showTxt5;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_resultado_busqueda);
         txt = (TextView) findViewById(R.id.listarResultadotxt);
+        showTxt2 = (TextView) findViewById(R.id.listarResultadoTxt2);
+        showTxt3 = (TextView) findViewById(R.id.listarResultadoTxt3);
+        showTxt4 = (TextView) findViewById(R.id.listarResultadoTxt4);
+        showTxt5 = (TextView) findViewById(R.id.listarResultadoTxt5);
         receta1 = (Button) findViewById(R.id.buttonResultado1);
         receta2 = (Button) findViewById(R.id.buttonResultado2);
         receta3 = (Button) findViewById(R.id.buttonResultado3);
@@ -100,6 +108,10 @@ public class resultadoBusqueda extends AppCompatActivity {
 
     private void mostrarSiguientes() {
         txt.setText("");
+        showTxt2.setText("");
+        showTxt3.setText("");
+        showTxt4.setText("");
+        showTxt5.setText("");
         multiplicador +=1;
         contador = 1;
         receta1.setVisibility(View.INVISIBLE);
@@ -113,29 +125,44 @@ public class resultadoBusqueda extends AppCompatActivity {
                 break;
             }
             if(contador==1){
-                receta1.setVisibility(View.VISIBLE);
                 Glide.with(resultadoBusqueda.this).asBitmap().load("https://s3.amazonaws.com/proyectolenguajes-userfiles-mobilehub-1737542905/public/"+fotos[0]).into(imagen1);
+                receta1.setVisibility(View.VISIBLE);
+                String content = "";
+                content += "Nombre: "+recetas.get(index).getNombre();
+                txt.setText(content);
             }
             if(contador==2){
-                receta2.setVisibility(View.VISIBLE);
                 Glide.with(resultadoBusqueda.this).asBitmap().load("https://s3.amazonaws.com/proyectolenguajes-userfiles-mobilehub-1737542905/public/"+fotos[0]).into(imagen2);
+                receta2.setVisibility(View.VISIBLE);
+                String content = "";
+                content += "Nombre: "+recetas.get(index).getNombre();
+                showTxt2.setText(content);
             }
             if(contador==3){
-                receta3.setVisibility(View.VISIBLE);
                 Glide.with(resultadoBusqueda.this).asBitmap().load("https://s3.amazonaws.com/proyectolenguajes-userfiles-mobilehub-1737542905/public/"+fotos[0]).into(imagen3);
+                receta3.setVisibility(View.VISIBLE);
+                String content = "";
+                content += "Nombre: "+recetas.get(index).getNombre();
+                showTxt3.setText(content);
             }
             if(contador==4){
-                receta4.setVisibility(View.VISIBLE);
                 Glide.with(resultadoBusqueda.this).asBitmap().load("https://s3.amazonaws.com/proyectolenguajes-userfiles-mobilehub-1737542905/public/"+fotos[0]).into(imagen4);
+                receta4.setVisibility(View.VISIBLE);
+                String content = "";
+                content += "Nombre: "+recetas.get(index).getNombre();
+                showTxt4.setText(content);
             }
             if(contador==5){
-                receta5.setVisibility(View.VISIBLE);
                 Glide.with(resultadoBusqueda.this).asBitmap().load("https://s3.amazonaws.com/proyectolenguajes-userfiles-mobilehub-1737542905/public/"+fotos[0]).into(imagen5);
+                receta5.setVisibility(View.VISIBLE);
+                String content = "";
+                content += "Nombre: "+recetas.get(index).getNombre();
+                showTxt5.setText(content);
             }
             contador+=1;
-            String content = "";
-            content += "Nombre: "+recetas.get(index).getNombre() + "\n \n \n";
-            txt.append(content);
+            //String content = "";
+            //content += "Nombre: "+recetas.get(index).getNombre() + "\n \n \n";
+            //txt.append(content);
         }
     }
     private void detalle(int posicion){

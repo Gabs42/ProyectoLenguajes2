@@ -64,12 +64,16 @@ public class MainActivity extends AppCompatActivity {
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this,registrar.class);
+                startActivity(intent);
+                /*
                 if(usuario.getText().toString().matches("") || password.getText().toString().matches("")){
                     txt.setText("Porfavor llenar todos los espacios");
                 }
                 else{
                     registrarUsuario(usuario.getText().toString(),password.getText().toString());
                 }
+                */
 
             }
         });
@@ -128,7 +132,7 @@ public class MainActivity extends AppCompatActivity {
                     txt.setText("Code" + response.code());
                     return;
                 }
-                txt.setText("Usuario agregado 2");
+                txt.setText("Usuario agregado");
             }
 
             @Override
