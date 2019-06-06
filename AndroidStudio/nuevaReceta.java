@@ -75,10 +75,20 @@ public class nuevaReceta extends AppCompatActivity {
                     error.setText("Porfavor llenar todos los espacios");
                 }
                 else{
-                    String ingredientes = Arrays.toString(ingrediente.getText().toString().split(","));
-                    String pasos = Arrays.toString(paso.getText().toString().split(","));
+                    int i,e;
+                    String [] arrayEsp = new String[ingrediente.getText().toString().split(",").length];
+                    String [] arrayEspPaso = new String[paso.getText().toString().split(",").length];
+                    for (i = 0; i < ingrediente.getText().toString().split(",").length; i++){
+                        arrayEsp[i] = ingrediente.getText().toString().split(",")[i].replaceAll("\\s+","space");
+                    }
+                    String ingredientes = Arrays.toString(arrayEsp);
+                    for (e = 0; e < paso.getText().toString().split(",").length; e++){
+                        arrayEspPaso[e] = paso.getText().toString().split(",")[e].replaceAll("\\s+","space");
+                    }
+                    String pasos = Arrays.toString(arrayEspPaso);
                     String fotosSend = Arrays.toString(fotos.split(","));
-                    agregarReceta(nombre.getText().toString().toLowerCase(),tipo.getText().toString().toLowerCase(),ingredientes.toLowerCase(),pasos.toLowerCase(),fotosSend.toLowerCase());
+                    String nombreEnviar = nombre.getText().toString().toLowerCase();
+                    agregarReceta(nombreEnviar.replaceAll("\\s+","space"),tipo.getText().toString().toLowerCase().replaceAll("\\s+","space"),ingredientes.toLowerCase(),pasos.toLowerCase(),fotosSend.toLowerCase());
                 }
 
             }
@@ -116,7 +126,7 @@ public class nuevaReceta extends AppCompatActivity {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         jsonPlaceHolderApi = retrofit.create(JsonPlaceHolderApi.class);
-        PostReceta post = new PostReceta(nombre,tipo,paso,ingrediente,foto);
+        PostReceta post = new PostReceta(nombre,tipo,paso,ingrediente,foto,MainActivity.token);
         Call<PostReceta> call = jsonPlaceHolderApi.createReceta(post);
         call.enqueue(new Callback<PostReceta>() {
             @Override
@@ -139,7 +149,7 @@ public class nuevaReceta extends AppCompatActivity {
 
     public void uploadWithTransferUtility() {
 
-        String filename = "key"+nombre.getText().toString()+Integer.toString(totalImagenes);
+        String filename = "key"+nombre.getText().toString().replaceAll("\\s+","")+Integer.toString(totalImagenes);
         totalImagenes+=1;
         TransferUtility transferUtility =
                 TransferUtility.builder()

@@ -244,14 +244,6 @@
         app:layout_constraintVertical_bias="0.131" />
 
     <TextView
-        android:id="@+id/textView4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TextView"
-        tools:layout_editor_absoluteX="-316dp"
-        tools:layout_editor_absoluteY="28dp" />
-
-    <TextView
         android:id="@+id/listarResultadoTxt4"
         android:layout_width="wrap_content"
         android:layout_height="25dp"

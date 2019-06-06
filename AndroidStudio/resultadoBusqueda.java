@@ -55,6 +55,11 @@ public class resultadoBusqueda extends AppCompatActivity {
         imagen3 = (ImageView) findViewById(R.id.imageResultado3);
         imagen4 = (ImageView) findViewById(R.id.imageResultado4);
         imagen5 = (ImageView) findViewById(R.id.imageResultado5);
+        imagen1.setVisibility(View.INVISIBLE);
+        imagen2.setVisibility(View.INVISIBLE);
+        imagen3.setVisibility(View.INVISIBLE);
+        imagen4.setVisibility(View.INVISIBLE);
+        imagen5.setVisibility(View.INVISIBLE);
         receta1.setVisibility(View.INVISIBLE);
         receta2.setVisibility(View.INVISIBLE);
         receta3.setVisibility(View.INVISIBLE);
@@ -119,44 +124,54 @@ public class resultadoBusqueda extends AppCompatActivity {
         receta3.setVisibility(View.INVISIBLE);
         receta4.setVisibility(View.INVISIBLE);
         receta5.setVisibility(View.INVISIBLE);
+        imagen1.setVisibility(View.INVISIBLE);
+        imagen2.setVisibility(View.INVISIBLE);
+        imagen3.setVisibility(View.INVISIBLE);
+        imagen4.setVisibility(View.INVISIBLE);
+        imagen5.setVisibility(View.INVISIBLE);
         for(int index = 0+(5*multiplicador);index<recetas.size();index++){
             String[] fotos = recetas.get(index).getFoto().split(",");
             if(contador >5){
                 break;
             }
             if(contador==1){
+                imagen1.setVisibility(View.VISIBLE);
                 Glide.with(resultadoBusqueda.this).asBitmap().load("https://s3.amazonaws.com/proyectolenguajes-userfiles-mobilehub-1737542905/public/"+fotos[0]).into(imagen1);
                 receta1.setVisibility(View.VISIBLE);
                 String content = "";
-                content += "Nombre: "+recetas.get(index).getNombre();
+                content += "Nombre: "+recetas.get(index).getNombre().replaceAll("space"," ");
                 txt.setText(content);
             }
             if(contador==2){
+                imagen2.setVisibility(View.VISIBLE);
                 Glide.with(resultadoBusqueda.this).asBitmap().load("https://s3.amazonaws.com/proyectolenguajes-userfiles-mobilehub-1737542905/public/"+fotos[0]).into(imagen2);
                 receta2.setVisibility(View.VISIBLE);
                 String content = "";
-                content += "Nombre: "+recetas.get(index).getNombre();
+                content += "Nombre: "+recetas.get(index).getNombre().replaceAll("space"," ");
                 showTxt2.setText(content);
             }
             if(contador==3){
+                imagen3.setVisibility(View.VISIBLE);
                 Glide.with(resultadoBusqueda.this).asBitmap().load("https://s3.amazonaws.com/proyectolenguajes-userfiles-mobilehub-1737542905/public/"+fotos[0]).into(imagen3);
                 receta3.setVisibility(View.VISIBLE);
                 String content = "";
-                content += "Nombre: "+recetas.get(index).getNombre();
+                content += "Nombre: "+recetas.get(index).getNombre().replaceAll("space"," ");
                 showTxt3.setText(content);
             }
             if(contador==4){
+                imagen4.setVisibility(View.VISIBLE);
                 Glide.with(resultadoBusqueda.this).asBitmap().load("https://s3.amazonaws.com/proyectolenguajes-userfiles-mobilehub-1737542905/public/"+fotos[0]).into(imagen4);
                 receta4.setVisibility(View.VISIBLE);
                 String content = "";
-                content += "Nombre: "+recetas.get(index).getNombre();
+                content += "Nombre: "+recetas.get(index).getNombre().replaceAll("space"," ");
                 showTxt4.setText(content);
             }
             if(contador==5){
+                imagen5.setVisibility(View.VISIBLE);
                 Glide.with(resultadoBusqueda.this).asBitmap().load("https://s3.amazonaws.com/proyectolenguajes-userfiles-mobilehub-1737542905/public/"+fotos[0]).into(imagen5);
                 receta5.setVisibility(View.VISIBLE);
                 String content = "";
-                content += "Nombre: "+recetas.get(index).getNombre();
+                content += "Nombre: "+recetas.get(index).getNombre().replaceAll("space"," ");
                 showTxt5.setText(content);
             }
             contador+=1;
@@ -167,10 +182,10 @@ public class resultadoBusqueda extends AppCompatActivity {
     }
     private void detalle(int posicion){
         String content = "";
-        content += "Nombre: "+recetas.get(posicion).getNombre() + "\n";
-        content += "Tipo: "+recetas.get(posicion).getTipo() + "\n";
-        content += "Ingredientes: "+recetas.get(posicion).getIngredientes() + "\n";
-        content += "Pasos: "+recetas.get(posicion).getPasos() + "\n";
+        content += "Nombre: "+recetas.get(posicion).getNombre().replaceAll("space"," ") + "\n";
+        content += "Tipo: "+recetas.get(posicion).getTipo().replaceAll("space"," ") + "\n";
+        content += "Ingredientes: "+recetas.get(posicion).getIngredientes().replaceAll("space"," ") + "\n";
+        content += "Pasos: "+recetas.get(posicion).getPasos().replaceAll("space"," ") + "\n";
         //content += "Fotos: "+recetas.get(posicion).getFoto() + "\n";
         Intent intent = new Intent(resultadoBusqueda.this,detalleReceta.class);
         intent.putExtra("Receta",content);

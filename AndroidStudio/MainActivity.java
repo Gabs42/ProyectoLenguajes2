@@ -37,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView txt;
     private String url = "https://dry-lake-72290.herokuapp.com/";
     JsonPlaceHolderApi jsonPlaceHolderApi;
+    public static String token = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,15 +97,22 @@ public class MainActivity extends AppCompatActivity {
                     return;
                 }
                 Post login = response.body();
+                /*
                 if(login.getUsername().equals("Accepted")){
                     Intent intent = new Intent(MainActivity.this,Menu.class);
                     startActivity(intent);
                 }
+                */
                 if(login.getUsername().equals("Rejected")){
                     //txt.setText("Yikes");
                 }
                 else{
-                    txt.setText("Login boys");
+                    token = login.getUsername();
+                    txt.setText(token);
+
+                    Intent intent = new Intent(MainActivity.this,Menu.class);
+                    startActivity(intent);
+
                 }
 
             }

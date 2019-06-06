@@ -6,13 +6,15 @@ public class PostReceta {
     String pasos;
     String ingredientes;
     String foto;
+    String token;
 
-    public PostReceta(String nombre, String tipo, String pasos, String ingredientes, String foto) {
+    public PostReceta(String nombre, String tipo, String pasos, String ingredientes, String foto,String token) {
         this.nombre = nombre;
         this.tipo = tipo;
         this.pasos = pasos;
         this.ingredientes = ingredientes;
         this.foto = foto;
+        this.token = token;
     }
 
     public String getNombre() {
@@ -34,4 +36,9 @@ public class PostReceta {
     public String getFoto() {
         return foto;
     }
+
+    public String getToken() {
+        return token;
+    }
+
 }

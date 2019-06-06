@@ -47,7 +47,7 @@ public class buscarRecetas extends AppCompatActivity {
                     error.setText("El campo de nombre debe estar lleno");
                 }
                 else{
-                    busquedaNombre(nombre.getText().toString().toLowerCase());
+                    busquedaNombre(nombre.getText().toString().toLowerCase().replaceAll("\\s+","space"));
                 }
 
             }
@@ -60,7 +60,7 @@ public class buscarRecetas extends AppCompatActivity {
                     error.setText("El campo de tipo debe estar lleno");
                 }
                 else{
-                    busquedaTipo(tipo.getText().toString().toLowerCase());
+                    busquedaTipo(tipo.getText().toString().toLowerCase().replaceAll("\\s+","space"));
                 }
             }
         });
@@ -72,7 +72,7 @@ public class buscarRecetas extends AppCompatActivity {
                     error.setText("El campo de tipo debe estar lleno");
                 }
                 else{
-                    busquedaIngrediente(ingrediente.getText().toString().toLowerCase());
+                    busquedaIngrediente(ingrediente.getText().toString().toLowerCase().replaceAll("\\s+","space"));
                 }
             }
         });
@@ -84,7 +84,7 @@ public class buscarRecetas extends AppCompatActivity {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         jsonPlaceHolderApi = retrofit.create(JsonPlaceHolderApi.class);
-        PostReceta post = new PostReceta(nombre,"","","","");
+        PostReceta post = new PostReceta(nombre,"","","","",MainActivity.token);
         Call<List<PostReceta>> call = jsonPlaceHolderApi.buscarRecetaNombre(post);
         call.enqueue(new Callback<List<PostReceta>>() {
             @Override
@@ -115,7 +115,7 @@ public class buscarRecetas extends AppCompatActivity {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         jsonPlaceHolderApi = retrofit.create(JsonPlaceHolderApi.class);
-        PostReceta post = new PostReceta("",tipo,"","","");
+        PostReceta post = new PostReceta("",tipo,"","","",MainActivity.token);
         Call<List<PostReceta>> call = jsonPlaceHolderApi.buscarRecetaTipo(post);
         call.enqueue(new Callback<List<PostReceta>>() {
             @Override
@@ -146,7 +146,7 @@ public class buscarRecetas extends AppCompatActivity {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         jsonPlaceHolderApi = retrofit.create(JsonPlaceHolderApi.class);
-        PostReceta post = new PostReceta("","","",Ingrediente,"");
+        PostReceta post = new PostReceta("","","",Ingrediente,"",MainActivity.token);
         Call<List<PostReceta>> call = jsonPlaceHolderApi.buscarRecetaIngrediente(post);
         call.enqueue(new Callback<List<PostReceta>>() {
             @Override
